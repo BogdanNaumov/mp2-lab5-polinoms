@@ -1,47 +1,37 @@
 #include "TPolinom.h"
+#include "THeadList.h"
 #include <gtest.h>
 
-TEST(Polinom, Created_polinom_is_empty) {
+TEST(TPolinom, Created_polinom_is_empty) {
+	TPolinom p;
+	EXPECT_TRUE(p.IsEmpty());
 }
 
-TEST(Polinom, Created_polinom_with_one_monom_is_not_empty) {
+TEST(TPolinom, Created_polinom_with_one_monom_is_not_empty) {
+	TPolinom p;
+	TMonom m(2.0, 2, 2, 2);
+	p.AddMonom(m);
+	EXPECT_FALSE(p.IsEmpty());
 }
 
-TEST(Polinom, Coefficients_add_up_if_degrees_are_equal) {
+TEST(TPolinom, Coefficients_add_up_if_degrees_are_equal) {
+	TPolinom p;
+	TMonom a(2.0, 1, 1, 1);
+	TMonom b(3.0, 1, 1, 1);
+	p.AddMonom(a);
+	p.AddMonom(b);
+	p.Reset();
+	EXPECT_TRUE((p.monoms.GetLength() == 1) && (p.monoms.GetCurrentItem().GetCoef() == 5.0));
 }
 
-TEST(Polinom, Coefficients_dont_add_up_if_degrees_are_different) {
+TEST(TPolinom, Coefficients_dont_add_up_if_degrees_are_different) {
+	TPolinom p;
+	TMonom a(2.0, 2, 1, 1);
+	TMonom b(3.0, 1, 1, 1);
+	p.AddMonom(a);
+	p.AddMonom(b);
+	p.Reset();
+	EXPECT_FALSE((p.monoms.GetLength() == 1) && (p.monoms.GetCurrentItem().GetCoef() == 5.0));
 }
 
-TEST(Polinom, Monom_delete_if_coefficient_equal_zero) {
-}
 
-TEST(Polinom, Can_not_get_monom_from_empty_polinom) {
-}
-
-TEST(Polinom, Copied_polinom_is_equal_copiable) {
-}
-
-TEST(Polinom, Assigned_polinom_is_equal_assignable) {
-}
-
-TEST(Polinom, Correct_adding_operator) {
-}
-
-TEST(Polinom, Correct_constant_multiply) {
-}
-
-TEST(Polinom, Correct_monom_multiply) {
-}
-
-TEST(Polinom, Correct_polinom_enter) {
-}
-
-TEST(Polinom, Correct_multiply_polinom1) {
-}
-
-TEST(Polinom, Correct_multiply_polinom2) {
-}
-
-TEST(Polinom, Correct_multiply_polinom3) {
-}

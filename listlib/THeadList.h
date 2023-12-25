@@ -16,9 +16,9 @@ public:
 };
 
 template<class T>
-THeadList<T>::THeadList()
+THeadList<T>::THeadList() : TList<T>()
 {
-
+	this->pHead = nullptr;
 }
 
 template<class T>
@@ -30,11 +30,35 @@ THeadList<T>::~THeadList()
 template <class T>
 void THeadList<T>::InsertFirst(T item)
 {
-
+	if (length == 0) {
+		pFirst = new TNode<T>(item, this->pHead, this->pLast);
+		pCurrent = pFirst;
+		pLast = pFirst;
+		pStop = pLast->pNext;
+	}
+	else {
+		TNode<T>* tmp = this->pCurrent;
+		this->pCurrent = this->pFirst;
+		this->InsertCurrent(item);
+		this->pCurrent = tmp;
+	}
+	length++;
 }
 
 template <class T>
 void THeadList<T>::DeleteFirst()
 {
+	if (this->pCurrent == this->pFirst) {
+		TNode<T>* tmp = this->pFirst->pNext;
+		this->DeleteCurrent();
+		this->pCurrent = tmp;
 
+	}
+	else {
+		TNode<T>* tmp = this->pCurrent;
+		this->pCurrent = this->pFirst;
+		this->DeleteCurrent();
+		this->pCurrent = tmp;
+	}
+	
 }
